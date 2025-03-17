@@ -8,7 +8,19 @@ import useFetch from '../hooks/useFetch'
 function useFetchGist(user: string, id: string) {
   // Ensure user doesn't have @ prefix from the URL
   const cleanUser = user.startsWith('@') ? user.substring(1) : user;
-  const url = `https://gist.githubusercontent.com/${cleanUser}/${id}/raw`
+  
+  // Use CORS proxy for development, direct API call for production
+  const isProduction = import.meta.env.PROD;
+  let url = '';
+
+  if (isProduction) {
+    // In production with Amplify hosting
+    url = `https://cors-anywhere.herokuapp.com/https://gist.githubusercontent.com/${cleanUser}/${id}/raw`;
+  } else {
+    // Local development
+    url = `https://gist.githubusercontent.com/${cleanUser}/${id}/raw`;
+  }
+  
   console.log('Fetching gist from URL:', url);
   return useFetch<string>(url)
 } 
@@ -43,6 +55,8 @@ const Gist = () => {
     return (
       <div className="container">
         <div className="error">ERROR LOADING GIST: {error.message}</div>
+        <p>This may be due to CORS restrictions. Try using a CORS proxy or viewing the gist directly on GitHub.</p>
+        <p><a href={`https://gist.github.com/${user.replace('@', '')}/${id}`} target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
       </div>
     )
   }
@@ -58,9 +72,9 @@ const Gist = () => {
           <Link to="/" className="site-title">GIST.IO</Link>
         </div>
         <div className="gist-info">
-          <a href={`https://github.com/${user}/`} target="_blank" rel="noopener noreferrer">@{user}</a>
+          <a href={`https://github.com/${user.replace('@', '')}/`} target="_blank" rel="noopener noreferrer">@{user.replace('@', '')}</a>
           /
-          <a href={`https://gist.github.com/${user}/${id}`} target="_blank" rel="noopener noreferrer">{id}</a>
+          <a href={`https://gist.github.com/${user.replace('@', '')}/${id}`} target="_blank" rel="noopener noreferrer">{id}</a>
         </div>
       </header>
 

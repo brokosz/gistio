@@ -1,0 +1,44 @@
+{
+  "features": {
+    "graphqlTransformer": {
+      "addMissingOwnerFields": true,
+      "improvePluralization": false,
+      "validateTypeNames": false,
+      "useExperimentalPipelinedTransformer": false,
+      "enableIterativeGsiUpdates": true,
+      "secondaryKeyAsGSI": true,
+      "skipOverrideMutationInputTypes": true
+    },
+    "frontend-ios": {
+      "enableXcodeIntegration": true
+    },
+    "auth": {
+      "enableCaseInsensitivity": true,
+      "useInclusiveTerminology": true,
+      "breakCircularDependency": true,
+      "forceAliasAttributes": false,
+      "useEnabledMfas": true
+    },
+    "codegen": {
+      "useAppSyncModelgenPlugin": true,
+      "useDocsGenerator": false,
+      "useTypesGenerator": true,
+      "usePipelinedTransformer": false,
+      "useModelTransformer": false,
+      "keepExistingDependencies": false
+    },
+    "apigateway": {
+      "restrictApiAccess": false,
+      "validateRequestParameters": true,
+      "allowXAccessTokenAuth": true
+    },
+    "function": {
+      "enableCors": true,
+      "enableLambdaLayers": true,
+      "addLayerVersionToOutput": true
+    },
+    "notifications": {
+      "activatePushNotifications": false
+    }
+  }
+}

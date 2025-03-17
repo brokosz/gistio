@@ -24,7 +24,11 @@ function useFetch<T>(url: string): UseFetchResult<T> {
       setError(null);
       
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          headers: {
+            'Accept': 'text/plain, application/json, text/html, */*'
+          }
+        });
         
         if (!response.ok) {
           throw new Error(`HTTP error ${response.status}`);
@@ -33,10 +37,12 @@ function useFetch<T>(url: string): UseFetchResult<T> {
         const result = await response.text() as unknown as T;
         
         if (isMounted) {
+          console.log('Fetched data:', result);
           setData(result);
           setIsLoading(false);
         }
       } catch (err) {
+        console.error('Fetch error:', err);
         if (isMounted) {
           setError(err instanceof Error ? err : new Error('An unknown error occurred'));
           setIsLoading(false);

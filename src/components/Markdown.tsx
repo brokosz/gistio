@@ -1,29 +1,31 @@
-import React from 'react'
-import { marked } from 'marked'
-import hljs from 'highlight.js'
-
-// Configure marked renderer
-marked.setOptions({
-  highlight: function(code, lang) {
-    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-    return hljs.highlight(code, { language }).value;
-  },
-  langPrefix: 'hljs language-',
-  gfm: true,
-  breaks: false
-});
+import { marked } from 'marked';
+import hljs from 'highlight.js';
+import '../styles/paraiso-hljs.css';
 
 interface MarkdownProps {
   raw: string;
 }
 
-const Markdown: React.FC<MarkdownProps> = ({ raw }) => {
-  // Memoize the parsed HTML to avoid unnecessary re-renders
-  const html = React.useMemo(() => {
-    return { __html: marked(raw) };
-  }, [raw]);
+const Markdown = ({ raw }: MarkdownProps) => {
+  marked.setOptions({
+    highlight: function(code, lang) {
+      try {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+      } catch (e) {
+        console.error(e);
+        return hljs.highlight(code, { language: 'plaintext' }).value;
+      }
+    },
+    gfm: true,
+    breaks: true,
+  });
 
-  return <div dangerouslySetInnerHTML={html} />
-}
+  const html = marked(raw);
 
-export default Markdown
+  return (
+    <div className="markdown-content" dangerouslySetInnerHTML={{ __html: html }} />
+  );
+};
+
+export default Markdown;
