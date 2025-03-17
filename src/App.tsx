@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { HelmetProvider } from 'react-helmet-async'
 import Gist from './components/Gist'
 import Home from './components/Home'
 import Settings from './components/settings/Settings'
 import './styles/settings.css'
+import './styles/settings-safari.css'
 import './styles/main.css'
+import './styles/paraiso-hljs.css'
 import './styles/themes.css'
 
 export default function App() {  

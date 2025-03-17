@@ -1,114 +1,82 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { 
+  Settings, 
   ThemeType, 
   ColorMode, 
   FontSize, 
-  ReadabilitySpacing, 
-  ParagraphWidth, 
+  ReadabilitySpacing,
+  ParagraphWidth,
   getSettings, 
   saveSettings, 
   applySettings 
-} from '../../utils/settingsStore'
+} from '../../utils/settingsStore';
 
 interface SettingsPanelProps {
+  isOpen: boolean;
   onClose: () => void;
 }
 
-const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
-  const [settings, setSettings] = useState(getSettings());
-  
-  // When settings change, save and apply them
+const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose }) => {
+  const [settings, setSettings] = useState<Settings>(getSettings());
+  const [showLigatureOption, setShowLigatureOption] = useState<boolean>(false);
+
+  // Check if ligatures are relevant to the current theme
   useEffect(() => {
-    saveSettings(settings);
-    applySettings(settings);
-  }, [settings]);
-  
-  // Update a single setting
-  const updateSetting = <K extends keyof typeof settings>(
-    key: K,
-    value: typeof settings[K]
-  ) => {
-    setSettings((prev) => ({ ...prev, [key]: value }));
+    // Only show ligature option for themes that support it
+    const hasLigatureSupport = ['brutalist', 'minimal', 'classic'].includes(settings.theme);
+    setShowLigatureOption(hasLigatureSupport);
+  }, [settings.theme]);
+
+  const updateSetting = <K extends keyof Settings>(key: K, value: Settings[K]) => {
+    const newSettings = { ...settings, [key]: value };
+    setSettings(newSettings);
+    saveSettings(newSettings);
+    applySettings(newSettings);
   };
-  
+
+  // Close panel when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isOpen && !target.closest('.settings-panel') && !target.closest('.settings-toggle')) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
   return (
     <div className="settings-panel">
       <div className="settings-header">
-        <h3>DISPLAY SETTINGS</h3>
-        <button className="close-button" onClick={onClose}>&times;</button>
+        <h3>Reading Options</h3>
+        <button className="close-button" onClick={onClose} aria-label="Close settings">×</button>
       </div>
       
       <div className="settings-section">
-        <label>COLOR THEME</label>
-        <div className="settings-options">
-          <div className="font-size-options">
-            <button 
-              className={`color-option light ${settings.colorMode === 'light' ? 'active' : ''}`}
-              onClick={() => updateSetting('colorMode', 'light' as ColorMode)}
-              aria-label="Light mode"
-            />
-            <button 
-              className={`color-option system ${settings.colorMode === 'system' ? 'active' : ''}`}
-              onClick={() => updateSetting('colorMode', 'system' as ColorMode)}
-              aria-label="System mode"
-            />
-            <button 
-              className={`color-option dark ${settings.colorMode === 'dark' ? 'active' : ''}`}
-              onClick={() => updateSetting('colorMode', 'dark' as ColorMode)}
-              aria-label="Dark mode"
-            />
-          </div>
-        </div>
-      </div>
-      
-      <div className="settings-divider"></div>
-      
-      <div className="settings-section">
-        <label>LAYOUT STYLE</label>
-        <div className="theme-buttons">
-          <button 
-            className={`theme-button ${settings.theme === 'brutalist' ? 'active' : ''}`}
-            onClick={() => updateSetting('theme', 'brutalist' as ThemeType)}
-          >
-            Brutalist
-          </button>
-          <button 
-            className={`theme-button ${settings.theme === 'minimal' ? 'active' : ''}`}
-            onClick={() => updateSetting('theme', 'minimal' as ThemeType)}
-          >
-            Minimal
-          </button>
-          <button 
-            className={`theme-button ${settings.theme === 'classic' ? 'active' : ''}`}
-            onClick={() => updateSetting('theme', 'classic' as ThemeType)}
-          >
-            Classic
-          </button>
-        </div>
-      </div>
-      
-      <div className="settings-divider"></div>
-      
-      <div className="settings-section">
-        <label>TEXT SIZE</label>
-        <div className="font-size-options">
+        <div className="settings-options font-size-options">
           <button 
             className={`text-size-option small ${settings.fontSize === 'small' ? 'active' : ''}`}
-            onClick={() => updateSetting('fontSize', 'small' as FontSize)}
+            onClick={() => updateSetting('fontSize', 'small')}
             aria-label="Small text"
           >
             A
           </button>
           <button 
             className={`text-size-option medium ${settings.fontSize === 'medium' ? 'active' : ''}`}
-            onClick={() => updateSetting('fontSize', 'medium' as FontSize)}
+            onClick={() => updateSetting('fontSize', 'medium')}
             aria-label="Medium text"
           >
             A
           </button>
           <button 
             className={`text-size-option large ${settings.fontSize === 'large' ? 'active' : ''}`}
-            onClick={() => updateSetting('fontSize', 'large' as FontSize)}
+            onClick={() => updateSetting('fontSize', 'large')}
             aria-label="Large text"
           >
             A
@@ -116,44 +84,85 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
         </div>
       </div>
       
+      <div className="settings-section">
+        <div className="theme-options">
+          {['light', 'dark', 'system'].map((mode) => (
+            <button
+              key={mode}
+              className={`color-option ${mode} ${settings.colorMode === mode ? 'active' : ''}`}
+              onClick={() => updateSetting('colorMode', mode as ColorMode)}
+              aria-label={`${mode} mode`}
+            >
+              <span className="color-icon"></span>
+            </button>
+          ))}
+        </div>
+      </div>
+      
       <div className="settings-divider"></div>
       
+      <div className="settings-section select-container">
+        <label htmlFor="theme-select">Theme</label>
+        <select
+          id="theme-select"
+          className="theme-select"
+          value={settings.theme}
+          onChange={(e) => updateSetting('theme', e.target.value as ThemeType)}
+        >
+          <option value="brutalist">Brutalist</option>
+          <option value="minimal">Minimal</option>
+          <option value="classic">Classic</option>
+          <option value="tailwind">Tailwind</option>
+        </select>
+      </div>
+      
+      {showLigatureOption && (
+        <div className="settings-section">
+          <label>Ligatures</label>
+          <div className="toggle-switch-container">
+            <label className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={settings.ligaturesEnabled}
+                onChange={() => updateSetting('ligaturesEnabled', !settings.ligaturesEnabled)}
+              />
+              <span className="toggle-slider"></span>
+            </label>
+            <span className="toggle-label">{settings.ligaturesEnabled ? 'On' : 'Off'}</span>
+          </div>
+        </div>
+      )}
+      
       <div className="settings-section">
-        <label>PARAGRAPH WIDTH</label>
+        <label>Text Width</label>
         <div className="width-options">
           <button 
             className={`width-option narrow ${settings.width === 'narrow' ? 'active' : ''}`}
-            onClick={() => updateSetting('width', 'narrow' as ParagraphWidth)}
-            aria-label="Narrow width"
+            onClick={() => updateSetting('width', 'narrow')}
           >
             <span className="width-line"></span>
           </button>
           <button 
             className={`width-option medium ${settings.width === 'medium' ? 'active' : ''}`}
-            onClick={() => updateSetting('width', 'medium' as ParagraphWidth)}
-            aria-label="Medium width"
+            onClick={() => updateSetting('width', 'medium')}
           >
             <span className="width-line"></span>
           </button>
           <button 
             className={`width-option wide ${settings.width === 'wide' ? 'active' : ''}`}
-            onClick={() => updateSetting('width', 'wide' as ParagraphWidth)}
-            aria-label="Wide width"
+            onClick={() => updateSetting('width', 'wide')}
           >
             <span className="width-line"></span>
           </button>
         </div>
       </div>
       
-      <div className="settings-divider"></div>
-      
       <div className="settings-section">
-        <label>TEXT SPACING</label>
+        <label>Spacing</label>
         <div className="spacing-options">
           <button 
             className={`spacing-option ${settings.spacing === 'compact' ? 'active' : ''}`}
-            onClick={() => updateSetting('spacing', 'compact' as ReadabilitySpacing)}
-            aria-label="Compact spacing"
+            onClick={() => updateSetting('spacing', 'compact')}
           >
             <span className="spacing-line"></span>
             <span className="spacing-line"></span>
@@ -161,8 +170,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
           </button>
           <button 
             className={`spacing-option ${settings.spacing === 'comfortable' ? 'active' : ''}`}
-            onClick={() => updateSetting('spacing', 'comfortable' as ReadabilitySpacing)}
-            aria-label="Comfortable spacing"
+            onClick={() => updateSetting('spacing', 'comfortable')}
           >
             <span className="spacing-line"></span>
             <span className="spacing-line"></span>
@@ -170,25 +178,11 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
           </button>
           <button 
             className={`spacing-option ${settings.spacing === 'spacious' ? 'active' : ''}`}
-            onClick={() => updateSetting('spacing', 'spacious' as ReadabilitySpacing)}
-            aria-label="Spacious spacing"
+            onClick={() => updateSetting('spacing', 'spacious')}
           >
             <span className="spacing-line"></span>
             <span className="spacing-line"></span>
             <span className="spacing-line"></span>
-          </button>
-        </div>
-      </div>
-      
-      <div className="settings-divider"></div>
-      
-      <div className="settings-section">
-        <div className="settings-options">
-          <button 
-            className={`small-button ${settings.ligaturesEnabled ? 'active' : ''}`}
-            onClick={() => updateSetting('ligaturesEnabled', !settings.ligaturesEnabled)}
-          >
-            {settings.ligaturesEnabled ? 'Ligatures On' : 'Ligatures Off'}
           </button>
         </div>
       </div>
