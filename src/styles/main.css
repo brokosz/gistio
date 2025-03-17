@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+  
+  h1, h2, h3 {
+    font-family: ui-sans-serif, system, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    @apply text-sm bg-gray-100 p-1 rounded;
+  }
+  
+  .content p, 
+  .content ul, 
+  .content ol {
+    @apply my-4 leading-relaxed;
+  }
+  
+  .content h1 {
+    @apply text-3xl font-semibold my-6;
+  }
+  
+  .content h2 {
+    @apply text-2xl font-semibold my-5;
+  }
+  
+  .content h3 {
+    @apply text-xl font-semibold my-4;
+  }
+  
+  .content a {
+    @apply text-blue-600 hover:underline;
+  }
+  
+  .content blockquote {
+    @apply pl-4 border-l-4 border-gray-300 italic text-gray-700 my-4;
+  }
+  
+  .content pre {
+    @apply my-4 rounded overflow-auto;
+  }
+}

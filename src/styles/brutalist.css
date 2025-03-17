@@ -1,0 +1,273 @@
+/* src/styles/brutalist.css */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --bg-color: #f2f2f2;
+  --text-color: #111111;
+  --accent-color: #000000;
+  --accent-hover: #333333;
+  --border-color: #000000;
+  --border-light: #cccccc;
+  --highlight-color: #ffff00;
+  --code-bg: #e0e0e0;
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  
+  /* Ligature settings that can be toggled via JS */
+  --liga-settings: "liga" 1, "dlig" 1, "clig" 1;
+  --liga-variant: common-ligatures contextual;
+}
+
+body {
+  font-family: 'IBM Plex Serif', serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-feature-settings: var(--liga-settings);
+  font-variant-ligatures: var(--liga-variant);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  border-left: 2px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
+  min-height: 100vh;
+}
+
+header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 4px solid var(--border-color);
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.gist-info {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  margin: 2rem 0 1rem 0;
+  text-transform: uppercase;
+  /* Disable ligatures for headings */
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
+  font-variant-ligatures: no-common-ligatures no-contextual;
+}
+
+h1 {
+  font-size: 2.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 2px solid var(--border-color);
+  transition: background-color 0.2s;
+  /* Fix spacing issues with inline links */
+  display: inline;
+  padding-bottom: 1px;
+  line-height: inherit;
+}
+
+a:hover {
+  background-color: var(--highlight-color);
+}
+
+p, ul, ol {
+  margin-bottom: 1.5rem;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+code {
+  font-family: 'Space Mono', monospace;
+  background-color: var(--code-bg);
+  padding: 0.2rem 0.4rem;
+  font-size: 0.9rem;
+}
+
+pre {
+  background-color: var(--code-bg);
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+blockquote {
+  border-left: 4px solid var(--border-color);
+  padding-left: 1rem;
+  margin-left: 0;
+  font-style: italic;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background-color: var(--code-bg);
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 4px solid var(--border-color);
+  font-size: 0.9rem;
+}
+
+/* Loading state */
+.loading {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 2rem;
+  border: 2px dashed var(--border-color);
+}
+
+/* Error state */
+.error {
+  color: red;
+  font-size: 1rem;
+  border: 2px solid red;
+  padding: 1rem;
+}
+
+/* Ligature control */
+body.no-ligatures {
+  --liga-settings: "liga" 0, "dlig" 0, "clig" 0;
+  --liga-variant: no-common-ligatures no-contextual;
+}
+
+.ligature-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--border-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 8px 12px;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+/* Example section for ligatures */
+.ligature-examples {
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.ligature-examples .example {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+/* Text width variations */
+:root {
+  --narrow-width: 600px;
+  --medium-width: 800px;
+  --wide-width: 1000px;
+}
+
+body.width-narrow .container {
+  max-width: var(--narrow-width);
+}
+
+body.width-medium .container {
+  max-width: var(--medium-width);
+}
+
+body.width-wide .container {
+  max-width: var(--wide-width);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #111111;
+    --text-color: #f2f2f2;
+    --accent-color: #ffffff;
+    --accent-hover: #cccccc;
+    --border-color: #ffffff;
+    --border-light: #333333;
+    --highlight-color: #404040;
+    --code-bg: #1e1e1e;
+    --hover-bg: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Explicit dark mode */
+body.dark-mode {
+  --bg-color: #111111;
+  --text-color: #f2f2f2;
+  --accent-color: #ffffff;
+  --accent-hover: #cccccc;
+  --border-color: #ffffff;
+  --border-light: #333333;
+  --highlight-color: #404040;
+  --code-bg: #1e1e1e;
+  --hover-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* Explicit light mode */
+body.light-mode {
+  --bg-color: #f2f2f2;
+  --text-color: #111111;
+  --accent-color: #000000;
+  --accent-hover: #333333;
+  --border-color: #000000;
+  --border-light: #cccccc;
+  --highlight-color: #ffff00;
+  --code-bg: #e0e0e0;
+  --hover-bg: rgba(0, 0, 0, 0.05);
+}

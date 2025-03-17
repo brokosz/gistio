@@ -1,0 +1,539 @@
+/* Gear icon in text */
+.gear-icon {
+  display: inline-block;
+  margin: 0 2px;
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+
+/* Dark mode specific overrides */
+body.dark-mode .settings-section label,
+.dark-mode .settings-section label,
+body.minimal.dark-mode .settings-section label,
+body.classic.dark-mode .settings-section label {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body.dark-mode .close-button,
+.dark-mode .close-button,
+body.minimal.dark-mode .close-button,
+body.classic.dark-mode .close-button {
+  color: #ffffff !important;
+}
+
+body.dark-mode .text-size-option,
+.dark-mode .text-size-option,
+body.minimal.dark-mode .text-size-option,
+body.classic.dark-mode .text-size-option,
+body.dark-mode .theme-button,
+.dark-mode .theme-button,
+body.minimal.dark-mode .theme-button,
+body.classic.dark-mode .theme-button,
+body.dark-mode .width-option,
+.dark-mode .width-option,
+body.minimal.dark-mode .width-option,
+body.classic.dark-mode .width-option,
+body.dark-mode .spacing-option,
+.dark-mode .spacing-option,
+body.minimal.dark-mode .spacing-option,
+body.classic.dark-mode .spacing-option,
+body.dark-mode .small-button,
+.dark-mode .small-button,
+body.minimal.dark-mode .small-button,
+body.classic.dark-mode .small-button {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .text-size-option.active,
+.dark-mode .text-size-option.active,
+body.minimal.dark-mode .text-size-option.active,
+body.classic.dark-mode .text-size-option.active,
+body.dark-mode .theme-button.active,
+.dark-mode .theme-button.active,
+body.minimal.dark-mode .theme-button.active,
+body.classic.dark-mode .theme-button.active,
+body.dark-mode .width-option.active,
+.dark-mode .width-option.active,
+body.minimal.dark-mode .width-option.active,
+body.classic.dark-mode .width-option.active,
+body.dark-mode .spacing-option.active,
+.dark-mode .spacing-option.active,
+body.minimal.dark-mode .spacing-option.active,
+body.classic.dark-mode .spacing-option.active,
+body.dark-mode .small-button.active,
+.dark-mode .small-button.active,
+body.minimal.dark-mode .small-button.active,
+body.classic.dark-mode .small-button.active {
+  background-color: #3a8eff !important;
+  border-color: #3a8eff !important;
+  color: #ffffff !important;
+}
+
+/* Ensure readable text in dark mode */
+body.dark-mode .settings-panel,
+.dark-mode .settings-panel,
+body.minimal.dark-mode .settings-panel,
+body.classic.dark-mode .settings-panel {
+  color: #f2f2f2 !important;
+  background-color: #1a1a1a !important;
+  border-color: #444 !important;
+}
+
+body.dark-mode .settings-panel label,
+.dark-mode .settings-panel label,
+body.minimal.dark-mode .settings-panel label,
+body.classic.dark-mode .settings-panel label {
+  color: #f2f2f2 !important;
+  opacity: 0.8;
+}
+
+body.dark-mode .color-option.active::after,
+.dark-mode .color-option.active::after,
+body.brutalist.dark-mode .color-option.active::after {
+  background-color: #3a8eff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Small button styles */
+.settings-options .small-button {
+  background-color: rgba(127, 127, 127, 0.1);
+  border: 2px solid var(--border-light);
+  padding: 6px 16px;
+  margin: 0;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  flex: 1;
+  min-width: 50px;
+  color: var(--text-color);
+}
+
+.settings-options .small-button:hover {
+  background-color: var(--hover-bg);
+}
+
+.settings-options .small-button.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+/* Settings panel and related styles */
+
+/* Settings toggle button */
+.settings-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.settings-toggle:hover {
+  transform: rotate(30deg);
+  background-color: var(--accent-hover);
+}
+
+/* Settings panel */
+.settings-panel {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 260px;
+  max-width: 90vw;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  z-index: 99;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-light);
+}
+
+/* Settings panel header */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px 10px 15px;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--accent-color);
+  color: white;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.settings-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  text-transform: none;
+  font-weight: 500;
+  color: white;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  color: white;
+}
+
+.settings-section {
+  padding: 8px 12px;
+}
+
+.settings-section label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.settings-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.settings-options button {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-light);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  flex: 1;
+  min-width: 60px;
+}
+
+.settings-options button:hover {
+  background-color: var(--hover-bg);
+}
+
+.settings-options button.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+/* Safari-like Reader settings styles */
+.font-size-options, .theme-options, .width-options, .spacing-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Text size buttons */
+.text-size-option {
+  background-color: rgba(127, 127, 127, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 45px;
+  height: 35px;
+  border-radius: 50px; /* Pill shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  color: var(--text-color);
+}
+
+.text-size-option.small {
+  font-size: 0.9rem;
+}
+
+.text-size-option.medium {
+  font-size: 1.2rem;
+}
+
+.text-size-option.large {
+  font-size: 1.5rem;
+}
+
+.text-size-option:hover {
+  background-color: var(--hover-bg);
+}
+
+.text-size-option.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.theme-options {
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Color options */
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.color-option.light {
+  background-color: #ffffff;
+}
+
+.color-option.dark {
+  background-color: #121212;
+}
+
+.color-option.system {
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 50%, #121212 50%, #121212 100%);
+}
+
+.color-option.active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.settings-divider {
+  height: 1px;
+  background-color: var(--border-light);
+  margin: 3px 0;
+  opacity: 0.5;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Theme buttons */
+.theme-button {
+  border: 2px solid var(--border-light);
+  background-color: rgba(127, 127, 127, 0.1);
+  padding: 6px 12px;
+  border-radius: 50px; /* Pill shape */
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+}
+
+.theme-button:hover {
+  background-color: var(--hover-bg);
+}
+
+.theme-button.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+/* Width control styles */
+.width-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.width-option {
+  background-color: rgba(127, 127, 127, 0.1);
+  border: 2px solid var(--border-light);
+  padding: 0;
+  cursor: pointer;
+  width: 45px;
+  height: 35px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--text-color);
+}
+
+.width-option:hover {
+  background-color: var(--hover-bg);
+}
+
+.width-option.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.width-line {
+  display: block;
+  height: 4px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+.width-option.narrow .width-line {
+  width: 15px;
+}
+
+.width-option.medium .width-line {
+  width: 25px;
+}
+
+.width-option.wide .width-line {
+  width: 35px;
+}
+
+/* Spacing control styles */
+.spacing-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.spacing-option {
+  background-color: rgba(127, 127, 127, 0.1);
+  border: 2px solid var(--border-light);
+  padding: 0;
+  cursor: pointer;
+  width: 45px;
+  height: 35px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--text-color);
+}
+
+.spacing-option:hover {
+  background-color: var(--hover-bg);
+}
+
+.spacing-option.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.spacing-line {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+.spacing-option:nth-child(1) .spacing-line {
+  margin-bottom: 0px;
+}
+
+.spacing-option:nth-child(2) .spacing-line {
+  margin-bottom: 1px;
+}
+
+.spacing-option:nth-child(3) .spacing-line {
+  margin-bottom: 3px;
+}
+
+/* Font size variations */
+body.font-small {
+  font-size: 14px;
+}
+
+body.font-medium {
+  font-size: 16px;
+}
+
+body.font-large {
+  font-size: 18px;
+}
+
+/* Spacing variations */
+body.spacing-compact {
+  --content-spacing: 0.8;
+}
+
+body.spacing-comfortable {
+  --content-spacing: 1;
+}
+
+body.spacing-spacious {
+  --content-spacing: 1.2;
+}
+
+body.spacing-compact .container {
+  padding: calc(1.5rem * var(--content-spacing)) calc(0.8rem * var(--content-spacing));
+}
+
+body.spacing-comfortable .container,
+body.spacing-spacious .container {
+  padding: calc(2rem * var(--content-spacing)) calc(1rem * var(--content-spacing));
+}
+
+body.spacing-compact p,
+body.spacing-compact ul,
+body.spacing-compact ol {
+  margin-bottom: calc(1rem * var(--content-spacing));
+}
+
+body.spacing-comfortable p,
+body.spacing-comfortable ul,
+body.spacing-comfortable ol,
+body.spacing-spacious p,
+body.spacing-spacious ul,
+body.spacing-spacious ol {
+  margin-bottom: calc(1.5rem * var(--content-spacing));
+}
+
+body.spacing-compact h1, 
+body.spacing-compact h2, 
+body.spacing-compact h3, 
+body.spacing-compact h4, 
+body.spacing-compact h5, 
+body.spacing-compact h6 {
+  margin: calc(1.5rem * var(--content-spacing)) 0 calc(0.5rem * var(--content-spacing)) 0;
+}
+
+body.spacing-comfortable h1,
+body.spacing-comfortable h2,
+body.spacing-comfortable h3,
+body.spacing-comfortable h4,
+body.spacing-comfortable h5,
+body.spacing-comfortable h6,
+body.spacing-spacious h1,
+body.spacing-spacious h2,
+body.spacing-spacious h3,
+body.spacing-spacious h4,
+body.spacing-spacious h5,
+body.spacing-spacious h6 {
+  margin: calc(2rem * var(--content-spacing)) 0 calc(1rem * var(--content-spacing)) 0;
+}

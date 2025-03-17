@@ -1,0 +1,572 @@
+/* macOS Safari-like Reader Settings styles */
+
+/* Base styles */
+.settings-panel {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 240px;
+  max-width: 90vw;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  z-index: 99;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Dark mode panel styling */
+body.dark-mode .settings-panel,
+.dark-mode .settings-panel,
+body.minimal.dark-mode .settings-panel,
+body.classic.dark-mode .settings-panel {
+  color: #f2f2f2 !important;
+  background-color: #2c2c2c !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Panel header */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.settings-header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+body.dark-mode .settings-header,
+.dark-mode .settings-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.close-button:hover {
+  opacity: 1;
+}
+
+/* Sections */
+.settings-section {
+  padding: 12px 15px;
+}
+
+.settings-section + .settings-section {
+  padding-top: 0;
+}
+
+.settings-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.settings-divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+body.dark-mode .settings-divider,
+.dark-mode .settings-divider {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Font size control */
+.font-size-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.text-size-option {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, serif;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+}
+
+.text-size-option.small {
+  font-size: 0.8rem;
+}
+
+.text-size-option.medium {
+  font-size: 1.1rem;
+}
+
+.text-size-option.large {
+  font-size: 1.4rem;
+}
+
+.text-size-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .text-size-option:hover,
+.dark-mode .text-size-option:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.text-size-option.active {
+  color: var(--accent-color);
+}
+
+/* Color mode selector */
+.theme-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.color-option.light {
+  background-color: #ffffff;
+}
+
+.color-option.dark {
+  background-color: #1a1a1a;
+}
+
+.color-option.system {
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 50%, #1a1a1a 50%, #1a1a1a 100%);
+}
+
+.color-option.active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+}
+
+body.dark-mode .color-option.active::after,
+.dark-mode .color-option.active::after {
+  background-color: #4d9fff;
+}
+
+/* Dropdown for themes */
+.select-container {
+  margin-bottom: 10px;
+}
+
+.theme-select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+body.dark-mode .theme-select,
+.dark-mode .theme-select {
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Toggle switch for ligatures */
+.toggle-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: .3s;
+  border-radius: 20px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--accent-color);
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px var(--accent-color);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+.toggle-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Width control */
+.width-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.width-option {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0;
+  cursor: pointer;
+  width: 45px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+body.dark-mode .width-option,
+.dark-mode .width-option {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.width-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .width-option:hover,
+.dark-mode .width-option:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.width-option.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .width-option.active,
+.dark-mode .width-option.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.width-line {
+  display: block;
+  height: 3px;
+  background-color: var(--text-color);
+  border-radius: 1.5px;
+}
+
+.width-option.narrow .width-line {
+  width: 15px;
+}
+
+.width-option.medium .width-line {
+  width: 25px;
+}
+
+.width-option.wide .width-line {
+  width: 35px;
+}
+
+/* Spacing control */
+.spacing-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.spacing-option {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0;
+  cursor: pointer;
+  width: 45px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+body.dark-mode .spacing-option,
+.dark-mode .spacing-option {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.spacing-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .spacing-option:hover,
+.dark-mode .spacing-option:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.spacing-option.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .spacing-option.active,
+.dark-mode .spacing-option.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spacing-line {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: var(--text-color);
+  border-radius: 1px;
+}
+
+/* Settings toggle button */
+.settings-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.settings-toggle:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .settings-toggle,
+.dark-mode .settings-toggle {
+  background-color: #2c2c2c;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #e0e0e0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .settings-toggle:hover,
+.dark-mode .settings-toggle:hover {
+  background-color: #3a3a3a;
+}
+
+/* Font size variations */
+body.font-small {
+  font-size: 14px;
+}
+
+body.font-medium {
+  font-size: 16px;
+}
+
+body.font-large {
+  font-size: 18px;
+}
+
+/* Text width variations */
+body.width-narrow .container {
+  max-width: 600px;
+}
+
+body.width-medium .container {
+  max-width: 800px;
+}
+
+body.width-wide .container {
+  max-width: 1000px;
+}
+
+/* Spacing variations */
+body.spacing-compact {
+  --content-spacing: 0.8;
+  line-height: 1.4;
+}
+
+body.spacing-comfortable {
+  --content-spacing: 1;
+  line-height: 1.6;
+}
+
+body.spacing-spacious {
+  --content-spacing: 1.2;
+  line-height: 1.9;
+}
+
+body.spacing-compact .container {
+  padding: calc(1.5rem * var(--content-spacing)) calc(0.8rem * var(--content-spacing));
+}
+
+body.spacing-comfortable .container,
+body.spacing-spacious .container {
+  padding: calc(2rem * var(--content-spacing)) calc(1rem * var(--content-spacing));
+}
+
+body.spacing-compact p,
+body.spacing-compact ul,
+body.spacing-compact ol {
+  margin-bottom: calc(1rem * var(--content-spacing));
+}
+
+body.spacing-comfortable p,
+body.spacing-comfortable ul,
+body.spacing-comfortable ol,
+body.spacing-spacious p,
+body.spacing-spacious ul,
+body.spacing-spacious ol {
+  margin-bottom: calc(1.5rem * var(--content-spacing));
+}
+
+body.spacing-compact h1, 
+body.spacing-compact h2, 
+body.spacing-compact h3, 
+body.spacing-compact h4, 
+body.spacing-compact h5, 
+body.spacing-compact h6 {
+  margin: calc(1.5rem * var(--content-spacing)) 0 calc(0.5rem * var(--content-spacing)) 0;
+}
+
+body.spacing-comfortable h1,
+body.spacing-comfortable h2,
+body.spacing-comfortable h3,
+body.spacing-comfortable h4,
+body.spacing-comfortable h5,
+body.spacing-comfortable h6,
+body.spacing-spacious h1,
+body.spacing-spacious h2,
+body.spacing-spacious h3,
+body.spacing-spacious h4,
+body.spacing-spacious h5,
+body.spacing-spacious h6 {
+  margin: calc(2rem * var(--content-spacing)) 0 calc(1rem * var(--content-spacing)) 0;
+}
+
+/* Additional paragraph and list spacing */
+body.spacing-compact p {
+  margin-bottom: 0.75rem;
+}
+
+body.spacing-comfortable p {
+  margin-bottom: 1rem;
+}
+
+body.spacing-spacious p {
+  margin-bottom: 1.5rem;
+}
+
+body.spacing-compact li {
+  margin-bottom: 0.3rem;
+}
+
+body.spacing-comfortable li {
+  margin-bottom: 0.5rem;
+}
+
+body.spacing-spacious li {
+  margin-bottom: 0.8rem;
+}
+
+/* More specific line height controls */
+body.spacing-compact .content,
+body.spacing-compact p,
+body.spacing-compact li,
+body.spacing-compact blockquote {
+  line-height: 1.4;
+}
+
+body.spacing-comfortable .content,
+body.spacing-comfortable p,
+body.spacing-comfortable li,
+body.spacing-comfortable blockquote {
+  line-height: 1.6;
+}
+
+body.spacing-spacious .content,
+body.spacing-spacious p,
+body.spacing-spacious li,
+body.spacing-spacious blockquote {
+  line-height: 2.0;
+}

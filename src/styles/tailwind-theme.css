@@ -1,0 +1,282 @@
+/* Tailwind spacing overrides for better compatibility */
+body.tailwind.spacing-compact {
+  line-height: 1.4;
+}
+
+body.tailwind.spacing-comfortable {
+  line-height: 1.6;
+}
+
+body.tailwind.spacing-spacious {
+  line-height: 2.0;
+}
+
+body.tailwind.spacing-compact p,
+body.tailwind.spacing-compact li {
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+body.tailwind.spacing-comfortable p,
+body.tailwind.spacing-comfortable li {
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+body.tailwind.spacing-spacious p,
+body.tailwind.spacing-spacious li {
+  margin-bottom: 1.5rem;
+  line-height: 2.0;
+}/* Tailwind-like theme for Gist.io */
+
+body.tailwind {
+  --bg-color: #ffffff;
+  --text-color: #1a202c; /* Tailwind gray-900 */
+  --accent-color: #3b82f6; /* Tailwind blue-500 */
+  --accent-hover: #2563eb; /* Tailwind blue-600 */
+  --border-color: #e5e7eb; /* Tailwind gray-200 */
+  --border-light: #f3f4f6; /* Tailwind gray-100 */
+  --highlight-color: #eff6ff; /* Tailwind blue-50 */
+  --code-bg: #f1f5f9; /* Tailwind slate-100 */
+  --hover-bg: rgba(59, 130, 246, 0.05);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 1.625; /* Tailwind's leading-relaxed */
+}
+
+body.tailwind .container {
+  border: none;
+  border-radius: 0.5rem; /* Tailwind rounded-lg */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* Tailwind shadow-sm */
+  background-color: var(--bg-color);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+body.tailwind header {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+body.tailwind .site-title {
+  font-size: 1.5rem; /* Tailwind text-2xl */
+  font-weight: 700; /* Tailwind font-bold */
+  color: var(--accent-color);
+  text-transform: none;
+}
+
+body.tailwind .gist-info {
+  margin-top: 1rem;
+  font-size: 0.875rem; /* Tailwind text-sm */
+  color: #6b7280; /* Tailwind gray-500 */
+}
+
+body.tailwind h1, 
+body.tailwind h2, 
+body.tailwind h3, 
+body.tailwind h4,
+body.tailwind h5,
+body.tailwind h6 {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700; /* Tailwind font-bold */
+  text-transform: none;
+  color: var(--text-color);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+body.tailwind h1 {
+  font-size: 2.25rem; /* Tailwind text-4xl */
+  border-bottom: none;
+  color: var(--text-color);
+  line-height: 1.25; /* Tailwind leading-tight */
+}
+
+body.tailwind h2 {
+  font-size: 1.875rem; /* Tailwind text-3xl */
+  line-height: 1.25; /* Tailwind leading-tight */
+}
+
+body.tailwind h3 {
+  font-size: 1.5rem; /* Tailwind text-2xl */
+}
+
+body.tailwind a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: none;
+  font-weight: 500; /* Tailwind font-medium */
+  transition: color 0.15s ease-in-out;
+  /* Fix spacing issues */
+  display: inline;
+  line-height: inherit;
+  padding-bottom: 0;
+}
+
+body.tailwind a:hover {
+  color: var(--accent-hover);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+body.tailwind p, 
+body.tailwind ul, 
+body.tailwind ol {
+  margin-bottom: 1.25rem;
+  color: #4b5563; /* Tailwind gray-600 */
+}
+
+body.tailwind ul, 
+body.tailwind ol {
+  padding-left: 1.5rem;
+}
+
+body.tailwind li {
+  margin-bottom: 0.5rem;
+}
+
+body.tailwind code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background-color: var(--code-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem; /* Tailwind rounded */
+  font-size: 0.875rem; /* Tailwind text-sm */
+  color: #6b7280; /* Tailwind gray-500 */
+}
+
+body.tailwind pre {
+  background-color: var(--code-bg);
+  border-radius: 0.375rem; /* Tailwind rounded-md */
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color);
+}
+
+body.tailwind pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+body.tailwind blockquote {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: #6b7280; /* Tailwind gray-500 */
+  font-style: italic;
+}
+
+body.tailwind table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+body.tailwind th, 
+body.tailwind td {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+body.tailwind th {
+  background-color: var(--code-bg);
+  font-weight: 600; /* Tailwind font-semibold */
+}
+
+body.tailwind footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.875rem; /* Tailwind text-sm */
+  color: #6b7280; /* Tailwind gray-500 */
+}
+
+/* Loading state */
+body.tailwind .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #6b7280; /* Tailwind gray-500 */
+  border: 2px dashed var(--border-color);
+  border-radius: 0.5rem; /* Tailwind rounded-lg */
+}
+
+/* Error state */
+body.tailwind .error {
+  padding: 1rem;
+  border-radius: 0.5rem; /* Tailwind rounded-lg */
+  background-color: #fee2e2; /* Tailwind red-100 */
+  color: #dc2626; /* Tailwind red-600 */
+  border: 1px solid #f87171; /* Tailwind red-400 */
+  font-size: 0.875rem; /* Tailwind text-sm */
+}
+
+/* Dark mode */
+body.tailwind.dark-mode {
+  --bg-color: #1f2937; /* Tailwind gray-800 */
+  --text-color: #f9fafb; /* Tailwind gray-50 */
+  --accent-color: #60a5fa; /* Tailwind blue-400 */
+  --accent-hover: #93c5fd; /* Tailwind blue-300 */
+  --border-color: #374151; /* Tailwind gray-700 */
+  --border-light: #4b5563; /* Tailwind gray-600 */
+  --highlight-color: #1e3a8a; /* Tailwind blue-900 */
+  --code-bg: #111827; /* Tailwind gray-900 */
+  --hover-bg: rgba(96, 165, 250, 0.1);
+}
+
+body.tailwind.dark-mode p, 
+body.tailwind.dark-mode ul, 
+body.tailwind.dark-mode ol {
+  color: #d1d5db; /* Tailwind gray-300 */
+}
+
+body.tailwind.dark-mode code {
+  color: #e5e7eb; /* Tailwind gray-200 */
+}
+
+body.tailwind.dark-mode blockquote {
+  color: #9ca3af; /* Tailwind gray-400 */
+}
+
+body.tailwind.dark-mode .gist-info,
+body.tailwind.dark-mode footer {
+  color: #9ca3af; /* Tailwind gray-400 */
+}
+
+/* System dark mode */
+@media (prefers-color-scheme: dark) {
+  body.tailwind:not(.light-mode):not(.dark-mode) {
+    --bg-color: #1f2937; /* Tailwind gray-800 */
+    --text-color: #f9fafb; /* Tailwind gray-50 */
+    --accent-color: #60a5fa; /* Tailwind blue-400 */
+    --accent-hover: #93c5fd; /* Tailwind blue-300 */
+    --border-color: #374151; /* Tailwind gray-700 */
+    --border-light: #4b5563; /* Tailwind gray-600 */
+    --highlight-color: #1e3a8a; /* Tailwind blue-900 */
+    --code-bg: #111827; /* Tailwind gray-900 */
+    --hover-bg: rgba(96, 165, 250, 0.1);
+  }
+  
+  body.tailwind:not(.light-mode):not(.dark-mode) p, 
+  body.tailwind:not(.light-mode):not(.dark-mode) ul, 
+  body.tailwind:not(.light-mode):not(.dark-mode) ol {
+    color: #d1d5db; /* Tailwind gray-300 */
+  }
+  
+  body.tailwind:not(.light-mode):not(.dark-mode) code {
+    color: #e5e7eb; /* Tailwind gray-200 */
+  }
+  
+  body.tailwind:not(.light-mode):not(.dark-mode) blockquote {
+    color: #9ca3af; /* Tailwind gray-400 */
+  }
+  
+  body.tailwind:not(.light-mode):not(.dark-mode) .gist-info,
+  body.tailwind:not(.light-mode):not(.dark-mode) footer {
+    color: #9ca3af; /* Tailwind gray-400 */
+  }
+}

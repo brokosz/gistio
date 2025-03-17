@@ -1,0 +1,258 @@
+/* Additional themes beyond brutalist */
+
+/* Minimal theme */
+body.minimal {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --accent-color: #0066cc;
+  --accent-hover: #0055aa;
+  --border-color: #dddddd;
+  --border-light: #eeeeee;
+  --highlight-color: #f0f7ff;
+  --code-bg: #f5f5f5;
+  --hover-bg: rgba(0, 102, 204, 0.05);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-feature-settings: var(--liga-settings);
+  font-variant-ligatures: var(--liga-variant);
+}
+
+body.minimal .container {
+  border: none;
+}
+
+body.minimal header {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+body.minimal h1, 
+body.minimal h2, 
+body.minimal h3, 
+body.minimal h4,
+body.minimal h5,
+body.minimal h6 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  text-transform: none;
+  color: #111;
+}
+
+body.minimal h1 {
+  font-size: 2.2rem;
+  border-bottom: none;
+  margin-top: 1rem;
+}
+
+body.minimal a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.2s;
+  /* Fix spacing issues */
+  display: inline;
+  line-height: inherit;
+  padding-bottom: 0;
+}
+
+body.minimal a:hover {
+  color: var(--accent-hover);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+body.minimal code {
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  background-color: var(--code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+body.minimal pre {
+  background-color: var(--code-bg);
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+body.minimal pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+body.minimal footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+
+/* Classic theme - serif, book-like */
+body.classic {
+  --bg-color: #fffff8;
+  --text-color: #333333;
+  --accent-color: #990000;
+  --accent-hover: #770000;
+  --border-color: #dddddd;
+  --border-light: #eeeeee;
+  --highlight-color: #fff9f9;
+  --code-bg: #f5f5f5;
+  --hover-bg: rgba(153, 0, 0, 0.05);
+  font-family: 'Georgia', serif;
+  font-feature-settings: var(--liga-settings);
+  font-variant-ligatures: var(--liga-variant);
+  line-height: 1.6;
+}
+
+body.classic .container {
+  border: none;
+  padding: 2rem 1rem;
+}
+
+body.classic header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+body.classic .site-title {
+  font-family: 'Georgia', serif;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 1.8rem;
+  text-transform: none;
+}
+
+body.classic h1, 
+body.classic h2, 
+body.classic h3, 
+body.classic h4,
+body.classic h5,
+body.classic h6 {
+  font-family: 'Georgia', serif;
+  text-transform: none;
+  font-weight: normal;
+  line-height: 1.3;
+  color: var(--accent-color);
+}
+
+body.classic h1 {
+  font-size: 2rem;
+  text-align: center;
+  border-bottom: none;
+  margin-top: 1rem;
+}
+
+body.classic h2 {
+  font-size: 1.6rem;
+}
+
+body.classic h3 {
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+body.classic a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 1px dotted;
+  padding-bottom: 1px;
+  /* Fix spacing issues */
+  display: inline;
+  line-height: inherit;
+}
+
+body.classic a:hover {
+  border-bottom: 1px solid;
+  background-color: transparent;
+}
+
+body.classic code {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background-color: var(--code-bg);
+  font-size: 0.9em;
+}
+
+body.classic pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+}
+
+body.classic pre code {
+  background-color: transparent;
+}
+
+body.classic blockquote {
+  font-style: italic;
+  margin-left: 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--accent-color);
+}
+
+body.classic footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Dark mode overrides for each theme */
+body.minimal.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #4d9fff;
+  --accent-hover: #77b7ff;
+  --border-color: #333333;
+  --border-light: #444444;
+  --highlight-color: #1a2733;
+  --code-bg: #1e1e1e;
+  --hover-bg: rgba(77, 159, 255, 0.1);
+}
+
+body.classic.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #e57373;
+  --accent-hover: #ef9a9a;
+  --border-color: #333333;
+  --border-light: #444444;
+  --highlight-color: #2d2020;
+  --code-bg: #1e1e1e;
+  --hover-bg: rgba(229, 115, 115, 0.1);
+}
+
+/* Media query for system dark mode in minimal theme */
+@media (prefers-color-scheme: dark) {
+  body.minimal:not(.light-mode):not(.dark-mode) {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --accent-color: #4d9fff;
+    --accent-hover: #77b7ff;
+    --border-color: #333333;
+    --border-light: #444444;
+    --highlight-color: #1a2733;
+    --code-bg: #1e1e1e;
+    --hover-bg: rgba(77, 159, 255, 0.1);
+  }
+}
+
+/* Media query for system dark mode in classic theme */
+@media (prefers-color-scheme: dark) {
+  body.classic:not(.light-mode):not(.dark-mode) {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --accent-color: #e57373;
+    --accent-hover: #ef9a9a;
+    --border-color: #333333;
+    --border-light: #444444;
+    --highlight-color: #2d2020;
+    --code-bg: #1e1e1e;
+    --hover-bg: rgba(229, 115, 115, 0.1);
+  }
+}
