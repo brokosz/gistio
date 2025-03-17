@@ -1,120 +1,199 @@
-import React from 'react'
-
-// Enums for settings
-enum Theme {
-  Brutalist = 'brutalist',
-  Minimal = 'minimal',
-  Classic = 'classic'
-}
-
-enum ColorMode {
-  Light = 'light',
-  Dark = 'dark',
-  System = 'system'
-}
-
-enum FontSize {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large'
-}
-
-enum ReadabilitySpacing {
-  Tight = 'tight',
-  Normal = 'normal',
-  Spacious = 'spacious'
-}
-
-enum ParagraphWidth {
-  Narrow = 'narrow',
-  Medium = 'medium',
-  Wide = 'wide'
-}
+import React, { useState, useEffect } from 'react'
+import { 
+  ThemeType, 
+  ColorMode, 
+  FontSize, 
+  ReadabilitySpacing, 
+  ParagraphWidth, 
+  getSettings, 
+  saveSettings, 
+  applySettings 
+} from '../../utils/settingsStore'
 
 interface SettingsPanelProps {
   onClose: () => void;
 }
 
-const SettingsPanel = ({ onClose }: SettingsPanelProps) => {
+const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
+  const [settings, setSettings] = useState(getSettings());
+  
+  // When settings change, save and apply them
+  useEffect(() => {
+    saveSettings(settings);
+    applySettings(settings);
+  }, [settings]);
+  
+  // Update a single setting
+  const updateSetting = <K extends keyof typeof settings>(
+    key: K,
+    value: typeof settings[K]
+  ) => {
+    setSettings((prev) => ({ ...prev, [key]: value }));
+  };
+  
   return (
     <div className="settings-panel">
       <div className="settings-header">
-        <h2>Settings</h2>
-        <button className="close-button" onClick={onClose}>×</button>
+        <h3>DISPLAY SETTINGS</h3>
+        <button className="close-button" onClick={onClose}>&times;</button>
       </div>
       
-      <div className="settings-content">
-        <div className="settings-section">
-          <h3>Coming Soon</h3>
-          <p>Settings functionality will be implemented in a future update.</p>
+      <div className="settings-section">
+        <label>COLOR THEME</label>
+        <div className="settings-options">
+          <div className="font-size-options">
+            <button 
+              className={`color-option light ${settings.colorMode === 'light' ? 'active' : ''}`}
+              onClick={() => updateSetting('colorMode', 'light' as ColorMode)}
+              aria-label="Light mode"
+            />
+            <button 
+              className={`color-option system ${settings.colorMode === 'system' ? 'active' : ''}`}
+              onClick={() => updateSetting('colorMode', 'system' as ColorMode)}
+              aria-label="System mode"
+            />
+            <button 
+              className={`color-option dark ${settings.colorMode === 'dark' ? 'active' : ''}`}
+              onClick={() => updateSetting('colorMode', 'dark' as ColorMode)}
+              aria-label="Dark mode"
+            />
+          </div>
         </div>
       </div>
       
-      <style jsx="true">{`
-        .settings-panel {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          width: 300px;
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          z-index: 110;
-          overflow: hidden;
-        }
-        
-        .settings-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 12px 16px;
-          border-bottom: 1px solid #eee;
-        }
-        
-        .settings-header h2 {
-          margin: 0;
-          font-size: 18px;
-        }
-        
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #666;
-        }
-        
-        .settings-content {
-          padding: 16px;
-        }
-        
-        .settings-section {
-          margin-bottom: 20px;
-        }
-        
-        .settings-section h3 {
-          margin-top: 0;
-          margin-bottom: 10px;
-          font-size: 16px;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-          .settings-panel {
-            background: #2d3748;
-            color: #e2e8f0;
-          }
-          
-          .settings-header {
-            border-bottom-color: #4a5568;
-          }
-          
-          .close-button {
-            color: #a0aec0;
-          }
-        }
-      `}</style>
+      <div className="settings-divider"></div>
+      
+      <div className="settings-section">
+        <label>LAYOUT STYLE</label>
+        <div className="theme-buttons">
+          <button 
+            className={`theme-button ${settings.theme === 'brutalist' ? 'active' : ''}`}
+            onClick={() => updateSetting('theme', 'brutalist' as ThemeType)}
+          >
+            Brutalist
+          </button>
+          <button 
+            className={`theme-button ${settings.theme === 'minimal' ? 'active' : ''}`}
+            onClick={() => updateSetting('theme', 'minimal' as ThemeType)}
+          >
+            Minimal
+          </button>
+          <button 
+            className={`theme-button ${settings.theme === 'classic' ? 'active' : ''}`}
+            onClick={() => updateSetting('theme', 'classic' as ThemeType)}
+          >
+            Classic
+          </button>
+        </div>
+      </div>
+      
+      <div className="settings-divider"></div>
+      
+      <div className="settings-section">
+        <label>TEXT SIZE</label>
+        <div className="font-size-options">
+          <button 
+            className={`text-size-option small ${settings.fontSize === 'small' ? 'active' : ''}`}
+            onClick={() => updateSetting('fontSize', 'small' as FontSize)}
+            aria-label="Small text"
+          >
+            A
+          </button>
+          <button 
+            className={`text-size-option medium ${settings.fontSize === 'medium' ? 'active' : ''}`}
+            onClick={() => updateSetting('fontSize', 'medium' as FontSize)}
+            aria-label="Medium text"
+          >
+            A
+          </button>
+          <button 
+            className={`text-size-option large ${settings.fontSize === 'large' ? 'active' : ''}`}
+            onClick={() => updateSetting('fontSize', 'large' as FontSize)}
+            aria-label="Large text"
+          >
+            A
+          </button>
+        </div>
+      </div>
+      
+      <div className="settings-divider"></div>
+      
+      <div className="settings-section">
+        <label>PARAGRAPH WIDTH</label>
+        <div className="width-options">
+          <button 
+            className={`width-option narrow ${settings.width === 'narrow' ? 'active' : ''}`}
+            onClick={() => updateSetting('width', 'narrow' as ParagraphWidth)}
+            aria-label="Narrow width"
+          >
+            <span className="width-line"></span>
+          </button>
+          <button 
+            className={`width-option medium ${settings.width === 'medium' ? 'active' : ''}`}
+            onClick={() => updateSetting('width', 'medium' as ParagraphWidth)}
+            aria-label="Medium width"
+          >
+            <span className="width-line"></span>
+          </button>
+          <button 
+            className={`width-option wide ${settings.width === 'wide' ? 'active' : ''}`}
+            onClick={() => updateSetting('width', 'wide' as ParagraphWidth)}
+            aria-label="Wide width"
+          >
+            <span className="width-line"></span>
+          </button>
+        </div>
+      </div>
+      
+      <div className="settings-divider"></div>
+      
+      <div className="settings-section">
+        <label>TEXT SPACING</label>
+        <div className="spacing-options">
+          <button 
+            className={`spacing-option ${settings.spacing === 'compact' ? 'active' : ''}`}
+            onClick={() => updateSetting('spacing', 'compact' as ReadabilitySpacing)}
+            aria-label="Compact spacing"
+          >
+            <span className="spacing-line"></span>
+            <span className="spacing-line"></span>
+            <span className="spacing-line"></span>
+          </button>
+          <button 
+            className={`spacing-option ${settings.spacing === 'comfortable' ? 'active' : ''}`}
+            onClick={() => updateSetting('spacing', 'comfortable' as ReadabilitySpacing)}
+            aria-label="Comfortable spacing"
+          >
+            <span className="spacing-line"></span>
+            <span className="spacing-line"></span>
+            <span className="spacing-line"></span>
+          </button>
+          <button 
+            className={`spacing-option ${settings.spacing === 'spacious' ? 'active' : ''}`}
+            onClick={() => updateSetting('spacing', 'spacious' as ReadabilitySpacing)}
+            aria-label="Spacious spacing"
+          >
+            <span className="spacing-line"></span>
+            <span className="spacing-line"></span>
+            <span className="spacing-line"></span>
+          </button>
+        </div>
+      </div>
+      
+      <div className="settings-divider"></div>
+      
+      <div className="settings-section">
+        <div className="settings-options">
+          <button 
+            className={`small-button ${settings.ligaturesEnabled ? 'active' : ''}`}
+            onClick={() => updateSetting('ligaturesEnabled', !settings.ligaturesEnabled)}
+          >
+            {settings.ligaturesEnabled ? 'Ligatures On' : 'Ligatures Off'}
+          </button>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SettingsPanel
+export default SettingsPanel;

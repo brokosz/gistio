@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
 
-// Use the new React 18 createRoot API
 const container = document.getElementById('root')
 if (container) {
   const root = createRoot(container)
